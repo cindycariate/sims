@@ -1,0 +1,149 @@
+/* GENERAL PAGE STYLING */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+body {
+  font-family: Arial, sans-serif;
+  background: #dff5e3;
+  margin: 0;
+  padding: 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #006d32;
+  /* margin-bottom: 20px; */
+  text-align: center;
+  font-size: 2rem;
+}
+
+/* FORM STYLING */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 1000px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
+}
+
+#studentForm input {
+  flex: 1 1 150px; /* grow, shrink, basis */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  min-width: 120px; /* ensures inputs don't get too small */
+}
+
+#studentForm button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  flex: 0 0 auto; /* button keeps its size */
+}
+
+input {
+  /* padding: 5px; */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  /* flex: 1 1 200px; */
+}
+
+.form-button {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* pushes button to right */
+  margin-top: 5px; /* spacing from inputs */
+  margin-right: 190px;
+}
+
+.add-btn {
+  padding: 8px 16px;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background-color: #006d32;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #b02a37;
+}
+
+/* SEARCH BAR */
+#searchInput {
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 1000px;
+  max-width: 1000px;
+}
+
+/* TABLE STYLING */
+table {
+  width: 90%;
+  max-width: 1000px;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+th {
+  background-color: #198754; /* 💚 Green header */
+  color: white;
+  padding: 12px;
+  text-align: center;
+}
+
+td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #e8f5e9;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #b02a37;
+}

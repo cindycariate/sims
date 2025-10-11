@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIMS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>STUDENT INFORMATION MANAGEMENT SYSTEM</h1>
+
+    <!-- ✅ Student Form -->
+    <form id="studentForm">
+      <input type="text" id="studentId" placeholder="Student ID" required />
+      <input type="text" id="fullName" placeholder="Full Name" required />
+      <input type="text" id="gender" placeholder="Gender" required />
+      <input type="email" id="gmail" placeholder="Gmail" required />
+      <input type="text" id="program" placeholder="Program" required />
+      <input type="text" id="yearLevel" placeholder="Year Level" required />
+      <input type="text" id="university" placeholder="University" required />
+    </form>
+    <div class="form-button">
+      <button class="add-btn" type="submit">Add Student</button>
+    </div>
+    <!-- ✅ Search Bar -->
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search by name or program..."
+    />
+
+    <!-- ✅ Students Table -->
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student ID</th>
+          <th>Full Name</th>
+          <th>Gender</th>
+          <th>Gmail</th>
+          <th>Program</th>
+          <th>Year Level</th>
+          <th>University</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody id="studentsTableBody"></tbody>
+    </table>
+
+    <script src="main.js"></script>
+  </body>
+</html>
