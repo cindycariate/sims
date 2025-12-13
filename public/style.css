@@ -1,149 +1,386 @@
-/* GENERAL PAGE STYLING */
+/* IMPORT GOOGLE FONT: Poppins (Geometric, Modern, and Aesthetic) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-
+/* --- Global Styles --- */
 body {
-  font-family: Arial, sans-serif;
-  background: #dff5e3;
+  font-family: "Poppins", sans-serif;
+  background-color: #f0f0ff; /* Light, soft lavender background (Aesthetic) */
+  color: #333;
+  line-height: 1.6;
   margin: 0;
-  padding: 40px;
-  min-height: 100vh;
+  padding: 0;
+}
+
+/* --- Color Palette --- */
+/* Header/Primary: #006064 (Deep Emerald Teal) */
+/* Accent/Add Button: #ff7043 (Coral Orange - Attractive Pop) */
+/* Search Button: #ffb300 (Warm Yellow) */
+
+h1,
+h2 {
+  color: #006064; /* Matching the deep teal primary color */
+  font-weight: 700;
+}
+
+/* --- Header and Footer (EMERALD GREEN THEME) --- */
+.page-header {
+  background-color: #006064; /* Deep Emerald Green */
+  color: white;
+  padding: 25px 0;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger, professional shadow */
+}
+
+.page-header h1 {
+  margin: 0;
+  color: white;
+}
+
+.page-footer {
+  text-align: center;
+  padding: 18px;
+  background-color: #006064; /* Matching the header color */
+  color: #fff;
+  margin-top: 40px;
+  font-size: 0.9em;
+}
+
+/* --- Layout and Card Styling --- */
+main {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 30px;
+}
+
+.form-section {
+  flex: 0 0 450px;
+  align-self: flex-start; /* Fixed width for the form */
+}
+
+.data-section {
+  flex-grow: 1;
+}
+
+.card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Form Styling --- */
+#studentForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 15px;
 }
 
-h1 {
-  color: #006d32;
-  /* margin-bottom: 20px; */
-  text-align: center;
-  font-size: 2rem;
-}
-
-/* FORM STYLING */
-form {
+.input-group {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 1000px;
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
+  flex-direction: column;
 }
 
-#studentForm input {
-  flex: 1 1 150px; /* grow, shrink, basis */
-  padding: 10px;
-  border-radius: 5px;
+.input-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #004d40; /* Darker teal for labels */
+}
+
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group select {
+  padding: 12px;
   border: 1px solid #ccc;
-  min-width: 120px; /* ensures inputs don't get too small */
-}
-
-#studentForm button {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  background-color: #007bff;
-  color: #fff;
-  cursor: pointer;
-  flex: 0 0 auto; /* button keeps its size */
-}
-
-input {
-  /* padding: 5px; */
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  /* flex: 1 1 200px; */
-}
-
-.form-button {
+  border-radius: 6px;
+  font-size: 1em;
   width: 100%;
+  box-sizing: border-box; /* Ensures padding is inside the width */
+}
+
+#submitBtn {
+  padding: 14px 25px;
+  background-color: #ff7043; /* Coral Orange */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+#submitBtn:hover {
+  background-color: #e65100; /* Darker orange on hover */
+  transform: translateY(-1px);
+}
+
+/* --- Search/Filter Styles (BONUS FEATURE STYLING) --- */
+.filter-controls {
   display: flex;
-  justify-content: flex-end; /* pushes button to right */
-  margin-top: 5px; /* spacing from inputs */
-  margin-right: 190px;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px 0;
 }
 
-.add-btn {
-  padding: 8px 16px;
-  background-color: teal;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.add-btn:hover {
-  background-color: #006d32;
-}
-
-button {
-  padding: 8px 16px;
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #b02a37;
-}
-
-/* SEARCH BAR */
 #searchInput {
-  margin: 20px 0;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 1000px;
-  max-width: 1000px;
+  flex-grow: 1; /* Magkuha sa pinakadako nga space */
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  min-width: 150px; /* Base size */
 }
 
-/* TABLE STYLING */
-table {
-  width: 90%;
-  max-width: 1000px;
+#genderFilter {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ffffff;
+}
+
+#searchBtn {
+  padding: 12px 20px;
+  background-color: #ffb300; /* Warm Yellow */
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+#searchBtn:hover {
+  background-color: #e69a00;
+}
+
+/* --- Table Styling (Required Display) --- */
+.table-container {
+  overflow-x: auto;
+  margin-top: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#studentTable {
+  width: 100%;
   border-collapse: collapse;
-  background: white;
+  margin-bottom: 20px;
+  background-color: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-th {
-  background-color: #198754; /* 💚 Green header */
+#studentTable th,
+#studentTable td {
+  padding: 14px 18px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+#studentTable th {
+  background-color: #006064; /* Deep Emerald Header */
   color: white;
-  padding: 12px;
-  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.95em;
 }
 
-td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
+/* Striped Table Effect */
+#studentTable tbody tr:nth-child(even) {
+  background-color: #f0f0ff; /* Matching the body background */
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+/* Hover Effect for Table Rows (Good UX) */
+#studentTable tbody tr:hover {
+  background-color: #e6e6ff; /* Light lavender tint on hover */
+  cursor: default;
 }
 
-tr:hover {
-  background-color: #e8f5e9;
-}
-
-/* DELETE BUTTON */
+/* Action Button (Delete) */
 .delete-btn {
-  background-color: #dc3545;
+  padding: 6px 12px;
+  background-color: #ef5350; /* Light Red */
   color: white;
   border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
 }
 
 .delete-btn:hover {
-  background-color: #b02a37;
+  background-color: #c62828; /* Darker red on hover */
+}
+
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+  }
+
+  .form-section {
+    flex: 1 1 100%;
+  }
+
+  .filter-controls {
+    flex-wrap: wrap;
+  }
+
+  .chat-section {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+  }
+  .chat-section h2 {
+    color: white;
+  }
+  .chat-box {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: #fafafa;
+  }
+  .chat-input {
+    display: flex;
+    gap: 10px;
+  }
+  .chat-input input {
+    flex: 1;
+    padding: 8px;
+  }
+  .user-msg {
+    font-weight: bold;
+  }
+  .llm-msg {
+    color: green;
+    font-style: italic;
+  }
+}
+.chat-section {
+  flex: 1 1 100%;
+  margin-top: 20px;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 300px;
+  overflow-y: auto;
+  padding: 15px;
+  border: 1px solid #ccc;
+  background: #fefefe;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+
+.chat-input button {
+  padding: 12px 20px;
+  background-color: #006064;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.chat-input button:hover {
+  background-color: #004d40;
+}
+
+/* Chat bubbles */
+.user-msg,
+.llm-msg {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  word-wrap: break-word;
+  font-size: 0.95em;
+  position: relative;
+}
+
+.user-msg {
+  background-color: #ffcc80; /* soft orange */
+  align-self: flex-end;
+  text-align: right;
+}
+
+.llm-msg {
+  background-color: #b2dfdb; /* soft teal */
+  align-self: flex-start;
+  text-align: left;
+}
+
+/* Timestamp */
+.user-msg .time,
+.llm-msg .time {
+  display: block;
+  font-size: 0.7em;
+  color: #666;
+  margin-top: 3px;
+  opacity: 0.8;
+}
+
+.chat-section {
+  max-width: 900px; /* same width as main content */
+  margin: 30px auto; /* spacing from other cards */
+  padding: 20px;
+  background-color: #006064;
+}
+
+.chat-section h2 {
+  color: white;
+}
+.chat-box {
+  height: 250px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 18px;
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #e65100;
 }

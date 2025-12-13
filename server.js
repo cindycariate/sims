@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const path = require("path");
+const { GoogleGenAI } = require("@google/genai"); // correct import
 
 const app = express();
 const PORT = 3000;
@@ -9,37 +11,35 @@ const DATA_FILE = "students.json";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public")); // your folder with index.html
+app.use(express.static("public")); // serve index.html and other static files
 
-// 🔹 Helper: read students
+// Helper: read students
 function readStudents() {
   if (!fs.existsSync(DATA_FILE)) return [];
-  const data = fs.readFileSync(DATA_FILE, "utf8");
   try {
+    const data = fs.readFileSync(DATA_FILE, "utf-8");
     return JSON.parse(data);
-  } catch (err) {
-    console.error("Error parsing JSON:", err);
+  } catch {
     return [];
   }
 }
 
-// 🔹 Helper: write students
+// Helper: write students
 function writeStudents(students) {
   fs.writeFileSync(DATA_FILE, JSON.stringify(students, null, 2));
 }
 
-// 🔹 GET all students
+// GET all students
 app.get("/students", (req, res) => {
   const students = readStudents();
   res.json(students);
 });
 
-// 🔹 POST new student
+// POST new student
 app.post("/students", (req, res) => {
   const students = readStudents();
   const newStudent = req.body;
 
-  // validation
   if (
     !newStudent.studentId ||
     !newStudent.fullName ||
@@ -52,11 +52,11 @@ app.post("/students", (req, res) => {
     return res.status(400).json({ error: "All fields are required" });
   }
 
-  // check duplicate ID
-  const exists = students.some(
-    (s) => s.studentId.toLowerCase() === newStudent.studentId.toLowerCase()
-  );
-  if (exists) {
+  if (
+    students.some(
+      (s) => s.studentId.toLowerCase() === newStudent.studentId.toLowerCase()
+    )
+  ) {
     return res.status(400).json({ error: "Student ID already exists" });
   }
 
@@ -65,23 +65,70 @@ app.post("/students", (req, res) => {
   res.json({ message: "Student added", student: newStudent });
 });
 
-// 🔹 DELETE student by ID
+// DELETE student by ID
 app.delete("/students/:id", (req, res) => {
   const students = readStudents();
-  const id = req.params.id;
   const filtered = students.filter(
-    (s) => s.studentId.toLowerCase() !== id.toLowerCase()
+    (s) => s.studentId.toLowerCase() !== req.params.id.toLowerCase()
   );
   writeStudents(filtered);
   res.json({ message: "Student deleted" });
 });
 
-// 🔹 Default route
+// Serve main page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-// 🔹 Start server
+// --- Gemini Chat (using @google/genai) ---
+const gemini = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY, // provide your key here
+});
+
+app.post("/api/chat", async (req, res) => {
+  const { message } = req.body;
+  const students = readStudents();
+
+  if (!message) return res.status(400).json({ error: "Message is required." });
+
+  if (!students.length)
+    return res.json({
+      reply: "The student dataset is empty. Add records first.",
+    });
+
+  try {
+    const prompt = `
+You are an assistant that analyzes STUDENT DATA only.
+Answer based ONLY on the provided dataset.
+
+USER QUESTION:
+${message}
+
+STUDENT DATA:
+${JSON.stringify(students, null, 2)}
+
+If the question is unrelated to students, answer:
+"I can only answer questions about the student data."
+    `;
+
+    // text generation call
+    const output = await gemini.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+    });
+
+    // extract text from API response
+    const reply = output.text || "No reply from Gemini API.";
+    res.json({ reply });
+  } catch (err) {
+    console.error("GEMINI ERROR:", err);
+    res.status(500).json({
+      error: "Failed to connect to Gemini API. Check your API key or network.",
+    });
+  }
+});
+
+// Start server
 app.listen(PORT, () =>
   console.log(`✅ Server running at http://localhost:${PORT}`)
 );

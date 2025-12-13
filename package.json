@@ -11,7 +11,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google/genai": "^1.33.0",
+    "@google/generative-ai": "^0.24.1",
+    "body-parser": "^2.2.1",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^2.7.0",
+    "openai": "^6.10.0"
   }
 }
