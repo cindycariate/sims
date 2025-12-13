@@ -3,7 +3,7 @@ const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const path = require("path");
-const { GoogleGenAI } = require("@google/genai"); // correct import
+const { GoogleGenAI } = require("@google/genai");
 
 const app = express();
 const PORT = 3000;
@@ -11,7 +11,7 @@ const DATA_FILE = "students.json";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public")); // serve index.html and other static files
+app.use(express.static("public"));
 
 // Helper: read students
 function readStudents() {
@@ -82,7 +82,7 @@ app.get("/", (req, res) => {
 
 // --- Gemini Chat (using @google/genai) ---
 const gemini = new GoogleGenAI({
-  apiKey: process.env.GEMINI_API_KEY, // provide your key here
+  apiKey: process.env.GEMINI_API_KEY,
 });
 
 app.post("/api/chat", async (req, res) => {
@@ -111,13 +111,11 @@ If the question is unrelated to students, answer:
 "I can only answer questions about the student data."
     `;
 
-    // text generation call
     const output = await gemini.models.generateContent({
       model: "gemini-2.5-flash",
       contents: prompt,
     });
 
-    // extract text from API response
     const reply = output.text || "No reply from Gemini API.";
     res.json({ reply });
   } catch (err) {
