@@ -7,7 +7,7 @@ const { GoogleGenAI } = require("@google/genai");
 
 const app = express();
 const PORT = 3000;
-const DATA_FILE = "students.json";
+const DATA_FILE = path.join(__dirname, "students.json");
 
 app.use(cors());
 app.use(express.json());
