@@ -7,21 +7,36 @@ const { GoogleGenAI } = require("@google/genai");
 
 const app = express();
 const PORT = 3000;
+
+// Use absolute path for students.json
 const DATA_FILE = path.join(__dirname, "students.json");
+
+// Debug log to see where Render is looking for the file
+console.log("DATA_FILE PATH:", DATA_FILE);
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-console.log("DATA_FILE PATH:", DATA_FILE);
-
 // Helper: read students
 function readStudents() {
-  if (!fs.existsSync(DATA_FILE)) return [];
+  let filePath = DATA_FILE;
+
+  // fallback: check one level up
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(__dirname, "..", "students.json");
+  }
+
+  if (!fs.existsSync(filePath)) {
+    console.error("❌ students.json NOT FOUND at:", filePath);
+    return [];
+  }
+
   try {
-    const data = fs.readFileSync(DATA_FILE, "utf-8");
+    const data = fs.readFileSync(filePath, "utf-8");
     return JSON.parse(data);
-  } catch {
+  } catch (err) {
+    console.error("❌ Failed to parse students.json:", err);
     return [];
   }
 }
