@@ -13,6 +13,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
+console.log("DATA_FILE PATH:", DATA_FILE);
+
 // Helper: read students
 function readStudents() {
   if (!fs.existsSync(DATA_FILE)) return [];
